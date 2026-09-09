@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "occasions": "Occasions",
+    "giftServices": "Gift Services",
+    "events": "Events",
+    "promotions": "Promotions",
+    "about": "About",
+    "search": "Search",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "account": "Account",
+    "menu": "Menu"
+  },
+  "common": {
+    "loading": "Loading...",
+    "viewAll": "View all",
+    "learnMore": "Learn more",
+    "shopNow": "Shop now",
+    "seeDetails": "See details",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit",
+    "close": "Close",
+    "continue": "Continue",
+    "back": "Back",
+    "change": "Change",
+    "language": "Language"
+  },
+  "gift": {
+    "wrapAsGift": "Wrap this item as a gift",
+    "giftWrapping": "Gift Wrapping",
+    "giftCard": "Gift Card",
+    "personalMessage": "Personal Message",
+    "preview": "Gift Preview",
+    "none": "None",
+    "messagePlaceholder": "Happy Birthday! Hope you enjoy your gift!",
+    "charactersRemaining": "{count} characters remaining",
+    "sendAsGift": "Send as a Gift",
+    "recipient": "Recipient",
+    "surpriseGift": "This is a surprise gift",
+    "deliveryDate": "Preferred delivery date",
+    "deliveryDateNotice": "This is a request, not a guarantee.",
+    "myself": "Myself",
+    "someoneElse": "Someone else"
+  },
+  "promotions": {
+    "active": "Active",
+    "upcoming": "Upcoming",
+    "expiringSoon": "Expiring Soon",
+    "applyCoupon": "Apply",
+    "couponCode": "Coupon code",
+    "couponApplied": "Coupon applied",
+    "invalidCoupon": "Invalid coupon"
+  },
+  "events": {
+    "requestQuote": "Request a Quote",
+    "contactTeam": "Contact Our Events Team",
+    "eventType": "Event Type",
+    "eventDate": "Event Date",
+    "eventLocation": "Event Location",
+    "guestCount": "Approximate Guest Count",
+    "budgetRange": "Budget Range",
+    "additionalInfo": "Additional Information",
+    "confirmationTitle": "Thanks — we've got your request!",
+    "confirmationBody": "Our events team will reach out within 1–2 business days to discuss the details."
+  },
+  "checkout": {
+    "step": "Step",
+    "placeOrder": "Place Order",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total"
+  },
+  "errors": {
+    "requiredField": "This field is required.",
+    "invalidEmail": "Enter a valid email address."
+  },
+  "empty": {
+    "cartEmpty": "Your cart is empty",
+    "noResults": "No results found"
+  }
+}

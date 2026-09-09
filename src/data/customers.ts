@@ -1,0 +1,137 @@
+import { Customer } from "@/types";
+
+// Local mock customer directory for the admin dashboard.
+// A real backend would replace this with a customers table/API —
+// see src/services/customers.ts for the abstraction boundary.
+
+export const customers: Customer[] = [
+  {
+    id: "cust_001",
+    name: "Layla Haddad",
+    email: "layla.haddad@example.com",
+    phone: "+961 71 234 567",
+    addresses: [
+      {
+        id: "addr_001",
+        fullName: "Layla Haddad",
+        line1: "12 Hamra Street",
+        city: "Beirut",
+        state: "Beirut",
+        postalCode: "1103",
+        country: "Lebanon",
+        phone: "+961 71 234 567",
+        isDefault: true,
+      },
+    ],
+    createdAt: "2025-11-02T10:00:00.000Z",
+    totalOrders: 4,
+    totalSpent: 312.45,
+  },
+  {
+    id: "cust_002",
+    name: "Marcus Chen",
+    email: "marcus.chen@example.com",
+    phone: "+1 415 555 0182",
+    addresses: [
+      {
+        id: "addr_002",
+        fullName: "Marcus Chen",
+        line1: "480 Market St",
+        city: "San Francisco",
+        state: "CA",
+        postalCode: "94105",
+        country: "United States",
+        phone: "+1 415 555 0182",
+        isDefault: true,
+      },
+    ],
+    createdAt: "2025-12-14T10:00:00.000Z",
+    totalOrders: 2,
+    totalSpent: 128.5,
+  },
+  {
+    id: "cust_003",
+    name: "Sofia Rossi",
+    email: "sofia.rossi@example.com",
+    addresses: [
+      {
+        id: "addr_003",
+        fullName: "Sofia Rossi",
+        line1: "Via Roma 22",
+        city: "Milan",
+        state: "MI",
+        postalCode: "20121",
+        country: "Italy",
+        phone: "+39 02 1234 5678",
+        isDefault: true,
+      },
+    ],
+    createdAt: "2026-01-20T10:00:00.000Z",
+    totalOrders: 7,
+    totalSpent: 589.2,
+  },
+  {
+    id: "cust_004",
+    name: "Omar Al-Sayed",
+    email: "omar.alsayed@example.com",
+    phone: "+971 50 123 4567",
+    addresses: [
+      {
+        id: "addr_004",
+        fullName: "Omar Al-Sayed",
+        line1: "Sheikh Zayed Rd",
+        city: "Dubai",
+        state: "Dubai",
+        postalCode: "00000",
+        country: "United Arab Emirates",
+        phone: "+971 50 123 4567",
+        isDefault: true,
+      },
+    ],
+    createdAt: "2026-02-08T10:00:00.000Z",
+    totalOrders: 1,
+    totalSpent: 44.99,
+  },
+  {
+    id: "cust_005",
+    name: "Emma Johnson",
+    email: "emma.johnson@example.com",
+    addresses: [
+      {
+        id: "addr_005",
+        fullName: "Emma Johnson",
+        line1: "221 Baker St",
+        city: "London",
+        state: "",
+        postalCode: "NW1 6XE",
+        country: "United Kingdom",
+        phone: "+44 20 7946 0958",
+        isDefault: true,
+      },
+    ],
+    createdAt: "2026-03-01T10:00:00.000Z",
+    totalOrders: 3,
+    totalSpent: 201.75,
+  },
+  {
+    id: "cust_006",
+    name: "Yuki Tanaka",
+    email: "yuki.tanaka@example.com",
+    addresses: [
+      {
+        id: "addr_006",
+        fullName: "Yuki Tanaka",
+        line1: "1-1 Shibuya",
+        city: "Tokyo",
+        state: "",
+        postalCode: "150-0002",
+        country: "Japan",
+        phone: "+81 90 1234 5678",
+        isDefault: true,
+      },
+    ],
+    createdAt: "2026-04-11T10:00:00.000Z",
+    totalOrders: 5,
+    totalSpent: 410.1,
+  },
+];

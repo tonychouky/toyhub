@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "shop": "المتجر",
+    "occasions": "المناسبات",
+    "giftServices": "خدمات الهدايا",
+    "events": "الفعاليات",
+    "promotions": "العروض",
+    "about": "من نحن",
+    "search": "بحث",
+    "wishlist": "المفضلة",
+    "cart": "السلة",
+    "account": "الحساب",
+    "menu": "القائمة"
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "viewAll": "عرض الكل",
+    "learnMore": "اعرف المزيد",
+    "shopNow": "تسوق الآن",
+    "seeDetails": "عرض التفاصيل",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "submit": "إرسال",
+    "close": "إغلاق",
+    "continue": "متابعة",
+    "back": "رجوع",
+    "change": "تغيير",
+    "language": "اللغة"
+  },
+  "gift": {
+    "wrapAsGift": "غلّف هذا المنتج كهدية",
+    "giftWrapping": "تغليف الهدايا",
+    "giftCard": "بطاقة هدية",
+    "personalMessage": "رسالة شخصية",
+    "preview": "معاينة الهدية",
+    "none": "بدون",
+    "messagePlaceholder": "عيد ميلاد سعيد! أتمنى أن تعجبك هديتك!",
+    "charactersRemaining": "{count} حرف متبقٍ",
+    "sendAsGift": "أرسلها كهدية",
+    "recipient": "المستلم",
+    "surpriseGift": "هذه هدية مفاجئة",
+    "deliveryDate": "تاريخ التسليم المفضل",
+    "deliveryDateNotice": "هذا طلب وليس تأكيدًا مضمونًا.",
+    "myself": "لنفسي",
+    "someoneElse": "لشخص آخر"
+  },
+  "promotions": {
+    "active": "نشط",
+    "upcoming": "قادم",
+    "expiringSoon": "ينتهي قريبًا",
+    "applyCoupon": "تطبيق",
+    "couponCode": "رمز الخصم",
+    "couponApplied": "تم تطبيق الرمز",
+    "invalidCoupon": "رمز غير صالح"
+  },
+  "events": {
+    "requestQuote": "اطلب عرض سعر",
+    "contactTeam": "تواصل مع فريق الفعاليات",
+    "eventType": "نوع الفعالية",
+    "eventDate": "تاريخ الفعالية",
+    "eventLocation": "مكان الفعالية",
+    "guestCount": "العدد التقريبي للضيوف",
+    "budgetRange": "الميزانية التقريبية",
+    "additionalInfo": "معلومات إضافية",
+    "confirmationTitle": "شكرًا — تم استلام طلبك!",
+    "confirmationBody": "سيتواصل معك فريق الفعاليات خلال يوم إلى يومي عمل لمناقشة التفاصيل."
+  },
+  "checkout": {
+    "step": "خطوة",
+    "placeOrder": "تأكيد الطلب",
+    "orderSummary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "shipping": "الشحن",
+    "tax": "الضريبة",
+    "total": "الإجمالي"
+  },
+  "errors": {
+    "requiredField": "هذا الحقل مطلوب.",
+    "invalidEmail": "أدخل بريدًا إلكترونيًا صحيحًا."
+  },
+  "empty": {
+    "cartEmpty": "سلتك فارغة",
+    "noResults": "لا توجد نتائج"
+  }
+}

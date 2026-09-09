@@ -1,0 +1,268 @@
+// ToyHub Prisma schema — SQL Server.
+// Mirrors src/types/index.ts. Simple scalar-array/object fields (features,
+// specifications, images, gallery, statusHistory, shippingAddress, recipient,
+// giftOptions, etc.) are stored as JSON text columns (@db.NVarChar(Max)) since
+// SQL Server has no native array/JSON column type. Real entity relationships
+// (Order -> OrderItem, Occasion <-> Product, Promotion <-> Product/Category)
+// get proper foreign keys / join tables. SQL Server has no native enum
+// support in Prisma, so union-typed fields (role, status, type) are plain
+// String columns validated at the service boundary, matching the TS union
+// types in src/types/index.ts.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  phone        String?
+  role         String   @default("customer") // "customer" | "admin"
+  createdAt    DateTime @default(now())
+}
+
+model Category {
+  slug        String      @id
+  name        String
+  description String
+  image       String
+  products    Product[]
+  promotions  Promotion[] @relation("PromotionCategories")
+}
+
+model Product {
+  id                String   @id @default(cuid())
+  name              String
+  brand             String
+  categorySlug      String
+  category          Category @relation(fields: [categorySlug], references: [slug])
+  slug              String   @unique
+  description       String   @db.NVarChar(Max)
+  price             Float
+  originalPrice     Float?
+  discount          Int?
+  images            String   @db.NVarChar(Max) // JSON string[]
+  rating            Float    @default(0)
+  reviewCount       Int      @default(0)
+  ageRange          String
+  stock             Int      @default(0)
+  sku               String   @unique
+  barcode           String?
+  features          String   @db.NVarChar(Max) // JSON string[]
+  specifications    String   @db.NVarChar(Max) // JSON Record<string,string>
+  safetyInformation String?  @db.NVarChar(Max)
+  whatsIncluded     String?  @db.NVarChar(Max) // JSON string[]
+  isBestSeller      Boolean  @default(false)
+  isNew             Boolean  @default(false)
+  isGiftable        Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  soldCount         Int?
+
+  reviews     Review[]
+  occasions   Occasion[]  @relation("OccasionProducts")
+  promotions  Promotion[] @relation("PromotionProducts")
+}
+
+model Review {
+  id                String  @id @default(cuid())
+  productId         String
+  product           Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  author            String
+  rating            Int
+  title             String
+  comment           String  @db.NVarChar(Max)
+  date              String
+  verifiedPurchase  Boolean @default(false)
+  helpfulCount      Int     @default(0)
+}
+
+model GiftWrapping {
+  id            String  @id @default(cuid())
+  name          String
+  image         String
+  previewImage  String?
+  price         Float
+  occasion      String?
+  active        Boolean @default(true)
+}
+
+model GiftCard {
+  id            String  @id @default(cuid())
+  name          String
+  image         String
+  previewImage  String?
+  price         Float
+  occasion      String?
+  active        Boolean @default(true)
+}
+
+model Occasion {
+  id             String     @id @default(cuid())
+  name           String
+  slug           String     @unique
+  description    String     @db.NVarChar(Max)
+  bannerImage    String
+  giftIdeasNote  String?    @db.NVarChar(Max)
+  active         Boolean    @default(true)
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime   @default(now())
+
+  products    Product[]   @relation("OccasionProducts")
+  promotions  Promotion[] @relation("OccasionPromotions")
+}
+
+model Promotion {
+  id                 String    @id @default(cuid())
+  name               String
+  description        String?   @db.NVarChar(Max)
+  type               String
+  value              Float?
+  couponCode         String?
+  startDate          DateTime
+  endDate            DateTime
+  minimumOrderValue  Float?
+  usageLimit         Int?
+  usageCount         Int       @default(0)
+  active             Boolean   @default(true)
+  bannerImage        String?
+
+  products    Product[]   @relation("PromotionProducts")
+  occasions   Occasion[]  @relation("OccasionPromotions")
+  categories  Category[]  @relation("PromotionCategories")
+}
+
+model EventService {
+  id                 String  @id @default(cuid())
+  slug               String  @unique
+  name               String
+  description        String  @db.NVarChar(Max)
+  image              String
+  gallery            String  @db.NVarChar(Max) // JSON string[]
+  servicesOffered    String  @db.NVarChar(Max) // JSON string[]
+  requiresQuote      Boolean @default(true)
+  eligibilityNotice  String? @db.NVarChar(Max)
+  active             Boolean @default(true)
+}
+
+model EventInquiry {
+  id                String   @id @default(cuid())
+  fullName          String
+  email             String
+  phone             String
+  eventType         String
+  eventDate         String
+  eventLocation     String
+  guestCount        String
+  serviceRequested  String
+  budgetRange       String
+  additionalInfo    String?  @db.NVarChar(Max)
+  createdAt         DateTime @default(now())
+}
+
+model CartItem {
+  id           String   @id @default(cuid())
+  userId       String?
+  visitorId    String?
+  productId    String
+  quantity     Int
+  giftOptions  String?  @db.NVarChar(Max) // JSON GiftOptions
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([visitorId])
+}
+
+model WishlistItem {
+  id         String   @id @default(cuid())
+  userId     String?
+  visitorId  String?
+  productId  String
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([visitorId])
+}
+
+model Order {
+  id               String   @id
+  customerId       String
+  customerName     String
+  customerEmail    String
+  subtotal         Float
+  shipping         Float
+  discount         Float
+  tax              Float
+  total            Float
+  status           String
+  paymentStatus    String
+  paymentMethod    String
+  shippingAddress  String   @db.NVarChar(Max) // JSON Address
+  deliveryMethod   String
+  createdAt        DateTime @default(now())
+  statusHistory    String   @db.NVarChar(Max) // JSON {status,date}[]
+
+  items           OrderItem[]
+  shipmentGroups  ShipmentGroup[]
+
+  @@index([customerId])
+}
+
+model OrderItem {
+  id           String  @id @default(cuid())
+  orderId      String
+  order        Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId    String
+  name         String
+  image        String
+  price        Float
+  quantity     Int
+  giftOptions  String? @db.NVarChar(Max) // JSON GiftOptions
+
+  @@index([orderId])
+}
+
+model ShipmentGroup {
+  id            String  @id @default(cuid())
+  orderId       String
+  order         Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  recipient     String? @db.NVarChar(Max) // JSON Recipient
+  itemIndexes   String  @db.NVarChar(Max) // JSON number[]
+  shippingCost  Float
+  status        String
+
+  @@index([orderId])
+}
+
+model StoreSettings {
+  id                          Int     @id @default(1)
+  sendAsGiftEnabled           Boolean @default(true)
+  giftWrappingEnabled         Boolean @default(true)
+  giftCardsEnabled            Boolean @default(true)
+  maxGiftMessageLength        Int     @default(300)
+  eligibleCategories          String  @db.NVarChar(Max) // JSON CategorySlug[]
+  scheduledDeliveryEnabled    Boolean @default(true)
+  hidePricesOnSurpriseGifts   Boolean @default(true)
+}
+
+model NotificationLogEntry {
+  id         String   @id @default(cuid())
+  type       String
+  orderId    String
+  summary    String
+  createdAt  DateTime @default(now())
+}
+
+model AnalyticsEvent {
+  id         String   @id @default(cuid())
+  event      String
+  payload    String?  @db.NVarChar(Max) // JSON Record<string, unknown>
+  createdAt  DateTime @default(now())
+}
